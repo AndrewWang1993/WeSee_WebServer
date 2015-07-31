@@ -10,7 +10,8 @@ public class Const {
 		public static int NO_SUCH_TABLE_ERROT = 0x0004;
 		public static int NO_SUCH_FILED_ERROT = 0x0005;
 		public static int DATABASE_LOGIN_ERROT = 0x0006;
-		public static int PARAM_DISMATCH_ERROT = 0x0007;
+		public static int PARAM_MISSED_ERROT = 0x0007;
+		public static int PASSWORD_MISSED_ERROT = 0x0008;
 	}
 
 	public interface general {

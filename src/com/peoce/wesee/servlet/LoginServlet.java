@@ -16,7 +16,7 @@ import com.peoce.wesee.utils.UserUtil;
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private static int ERROR_CODE = Const.error_code.SUCCESS;
+	private  int ERROR_CODE = Const.error_code.SUCCESS;
 	private User u = null;
 
 	@Override
@@ -30,22 +30,36 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		resp.setContentType("text/html;charset=UTF-8");
 		int id = 0;
+		ERROR_CODE = Const.error_code.SUCCESS;
 		String phoneNumber = null;
 		String nickName = null;
 		String password = null;
-		try {
-			id = Integer.valueOf(req.getParameter(Const.users.USERS_ID));
-		} catch (NumberFormatException e) {
-			ERROR_CODE = Const.error_code.PARAM_MALE_FORMAT_ERROT;
-			System.out.println("should ente a valid id number!!!");
-			write(ERROR_CODE, resp);
-			e.printStackTrace();
-			return;
-		}
+
 		phoneNumber = req.getParameter(Const.users.USERS_PHONENUMBER);
 		nickName = req.getParameter(Const.users.USERS_NICKNAME);
 		password = req.getParameter(Const.users.USERS_PASSWORD);
 
+		if (phoneNumber == null && nickName == null) {
+			String strId = req.getParameter(Const.users.USERS_ID);
+			if (password == null) {
+				ERROR_CODE = Const.error_code.PASSWORD_MISSED_ERROT;
+				System.out.println("password missed !!!");
+				write(ERROR_CODE, resp);
+			} else if (strId == null) {
+				ERROR_CODE = Const.error_code.PARAM_MISSED_ERROT;
+				System.out.println("parameters missed !!!");
+				write(ERROR_CODE, resp);
+			} else if (strId != null) {
+				try {
+					id = Integer.valueOf(strId);
+				} catch (NumberFormatException e) {
+					ERROR_CODE = Const.error_code.PARAM_MALE_FORMAT_ERROT;
+					System.out.println("should ente a valid id number!!!");
+					write(ERROR_CODE, resp);
+					e.printStackTrace();
+				}
+			}
+		}
 		if (password != null) {
 			if (id != 0) {
 				u = UserUtil.getInstance().loginWithId(id, password);
@@ -54,19 +68,14 @@ public class LoginServlet extends HttpServlet {
 						.loginWithPhone(phoneNumber, password);
 			} else if (nickName != null) {
 				u = UserUtil.getInstance().loginWithNick(nickName, password);
-			} else {
-				ERROR_CODE = Const.error_code.PARAM_DISMATCH_ERROT;
-				System.out.println("parameters does not match !!!");
-				write(ERROR_CODE, resp);
-				return;
 			}
-		} else {
-			ERROR_CODE = Const.error_code.PARAM_DISMATCH_ERROT;
-			System.out.println("parameters does not match !!!");
 			write(ERROR_CODE, resp);
-			return;
+		}else {
+			ERROR_CODE = Const.error_code.PASSWORD_MISSED_ERROT;
+			System.out.println("password missed !!!");
+			write(ERROR_CODE, resp);
 		}
-		write(ERROR_CODE, resp);
+
 	}
 
 	private void write(int error_code, HttpServletResponse resp) {
