@@ -16,13 +16,18 @@ public class DbUtil {
 
 	public static Connection openDb() {
 		if (null == instance) {
-			String url = "jdbc:mysql://" + Const.general.SERVER_URL + ":"
-					+ Const.general.SERVER_PORT + "/" + Const.general.DATABASE_NAME
-					+ "?Unicode=true&characterEncoding=utf-8";
+			String url = "jdbc:mysql://"
+					+ Const.general.SERVER_URL
+					+ ":"
+					+ Const.general.SERVER_PORT
+					+ "/"
+					+ Const.general.DATABASE_NAME
+					+ "?Unicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true";
 			try {
 				Class.forName(Const.general.JDBC_DRIVER);
 				instance = DriverManager.getConnection(url,
-						Const.general.DATABASE_USER, Const.general.DATABASE_PASSWORD);
+						Const.general.DATABASE_USER,
+						Const.general.DATABASE_PASSWORD);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println(e.getMessage());
