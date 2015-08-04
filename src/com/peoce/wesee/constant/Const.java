@@ -12,6 +12,8 @@ public class Const {
 		public static int DATABASE_LOGIN_ERROT = 0x0006;
 		public static int PARAM_MISSED_ERROT = 0x0007;
 		public static int PASSWORD_MISSED_ERROT = 0x0008;
+		public static int PHONENUMBER_MISSED_ERROT = 0x0009;
+		public static int UNKNOW_ERROR = 0x000A;
 	}
 
 	public interface general {
@@ -20,6 +22,7 @@ public class Const {
 		public static final String SERVER_URL = "127.0.0.1";
 		public static final String SERVER_PORT = "3306";
 		public static final String DATABASE_USER = "root";
+//		public static final String DATABASE_PASSWORD = "linux43032";
 		public static final String DATABASE_PASSWORD = "123456";
 	}
 
@@ -34,5 +37,23 @@ public class Const {
 		public static final String USERS_EMAIL = "Email";
 		public static final String USERS_PHOTO_URL = "PhotoURL";
 		public static final String USERS_SIGNTIME = "SignTime";
+	}
+
+	public interface pic{
+		public static final String TABLE_NAME_PIC = "pic";
+		public static final String PIC_PHOTOID = "PhotoId";
+		public static final String PIC_PHOTOURL = "PhotoUrl";
+		public static final String PIC_UPCOUNT = "UpCount";
+		public static final String PIC_CREATEBY = "CreateBy";
+		public static final String PIC_CREATETIME = "PicCreateTime";
+		public static final String PIC_TAG = "Tag";
+		public static final String PARA_START = "start";
+		public static final String PARA_OFF = "off";
+		
+	}
+	
+	public interface sqlresponse {
+		public static final int SQL_OK = 0x1000;
+		public static final int SQL_FAIL = 0x1001;
 	}
 }

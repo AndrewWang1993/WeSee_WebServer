@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.peoce.wesee.constant.Const;
 import com.peoce.wesee.model.User;
@@ -14,7 +17,7 @@ public class UserUtil {
 	public static Connection conn;
 	public static Statement statement;
 
-	public UserUtil() {
+	private UserUtil() {
 		conn = DbUtil.openDb();
 		try {
 			statement = conn.createStatement();
@@ -25,7 +28,7 @@ public class UserUtil {
 
 	public static UserUtil getInstance() {
 		if (null == instance) {
-				instance = new UserUtil();
+			instance = new UserUtil();
 		}
 		return instance;
 	}
@@ -56,6 +59,12 @@ public class UserUtil {
 		return getInfo(statement, sql);
 	}
 
+	public User checkIdDupli(int id) {
+		String sql = "SELECT * FROM " + Const.users.TABLE_NAME_USERS
+				+ " WHERE " + Const.users.USERS_ID + " = " + id;
+		return getInfo(statement, sql);
+	}
+
 	private User getInfo(Statement state, String sql) {
 		try {
 			ResultSet rs = state.executeQuery(sql);
@@ -80,4 +89,24 @@ public class UserUtil {
 		return null;
 	}
 
+	public int regedit(int id, String phoneNumber, String passWord) {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String regeditDate = df.format(new Date());
+		String sql = "INSERT INTO " + Const.users.TABLE_NAME_USERS + " ( "
+				+ Const.users.USERS_ID + " , " + Const.users.USERS_PHONENUMBER
+				+ " , " + Const.users.USERS_PASSWORD + " , "
+				+ Const.users.USERS_SIGNTIME + " ) VALUES ( " + id + " , '"
+				+ phoneNumber + "','" + passWord + "' , '" + regeditDate + "')";
+		try {
+			int feekCode = statement.executeUpdate(sql);
+			if (feekCode > 0) {
+				return Const.sqlresponse.SQL_OK;
+			} else {
+				return Const.sqlresponse.SQL_FAIL;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Const.error_code.UNKNOW_ERROR;
+	}
 }
