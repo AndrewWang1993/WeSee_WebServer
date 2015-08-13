@@ -8,6 +8,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import sun.org.mozilla.javascript.internal.ast.ForInLoop;
+
 import com.peoce.wesee.constant.Const;
 import com.peoce.wesee.model.User;
 
@@ -63,6 +65,32 @@ public class UserUtil {
 		String sql = "SELECT * FROM " + Const.users.TABLE_NAME_USERS
 				+ " WHERE " + Const.users.USERS_ID + " = " + id;
 		return getInfo(statement, sql);
+	}
+
+	public String getPassWord(int id) {
+		String sql = "SELECT " + Const.users.USERS_PASSWORD + " FROM "
+				+ Const.users.TABLE_NAME_USERS + " WHERE "
+				+ Const.users.USERS_ID + " = " + id;
+		return getField(statement, sql, Const.users.USERS_PASSWORD)[0];
+	}
+
+	private String[] getField(Statement state, String sql, String... field) {
+		try {
+			ResultSet rs = state.executeQuery(sql);
+			int fieldCount = field.length;
+			String[] fieldValue = new String[fieldCount];
+			if (rs.next()) {
+				for (int i = 0; i < fieldCount; i++) {
+					fieldValue[i] = rs.getString(field[i]);
+				}
+				rs.close();
+				return fieldValue;
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private User getInfo(Statement state, String sql) {

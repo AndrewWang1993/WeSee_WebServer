@@ -33,6 +33,12 @@
 		<servlet-name>WhathotServlet</servlet-name>
 		<servlet-class>com.peoce.wesee.servlet.content.WhathotServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>My Friend list</description>
+		<display-name>Get My Friend List</display-name>
+		<servlet-name>MyFriendListServlet</servlet-name>
+		<servlet-class>com.peoce.wesee.servlet.circle.MyFriendListServlet</servlet-class>
+	</servlet>
 
 
 	<servlet-mapping>
@@ -50,6 +56,10 @@
 	<servlet-mapping>
 		<servlet-name>WhathotServlet</servlet-name>
 		<url-pattern>/whathot</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>MyFriendListServlet</servlet-name>
+		<url-pattern>/myfriendlist</url-pattern>
 	</servlet-mapping>
 
 
