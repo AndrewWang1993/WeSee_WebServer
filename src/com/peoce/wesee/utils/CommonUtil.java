@@ -1,4 +1,5 @@
-class CommonUtil{
+package com.peoce.wesee.utils;
+public class CommonUtil{
   public static Integer[] int2Integer(int [] array){
     int len=array.length;
     Integer [] temp=new Integer[len];
