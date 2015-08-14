@@ -55,7 +55,7 @@ public class MyFriendListServlet extends HttpServlet {
 		friendList=CircleUtil.GetInstance().getFriendList(id);
 		write(error_code, resp);
 	}
-	
+
 	private void write(int error_code, HttpServletResponse resp) {
 		PrintWriter pw = null;
 		try {
@@ -64,8 +64,8 @@ public class MyFriendListServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		if (Const.error_code.SUCCESS == error_code && null != friendList) {
-	
-			String respJson = JsonUtil.generaJsonArray(friendList);
+
+			String respJson = JsonUtil.generaJsonArray(CommonUtil.int2Integer(friendList));
 			pw.write(respJson);
 		} else {
 			pw.write("{errorcode:" + error_code + "}");
