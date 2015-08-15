@@ -8,7 +8,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
 import com.peoce.wesee.constant.Const;
 import com.peoce.wesee.model.User;
 
@@ -35,7 +34,6 @@ public class UserUtil {
 	}
 
 	public User loginWithPhone(String phone, String passWord) {
-		passWord = EncryUtil.getHash(passWord);
 		String sql = "SELECT * FROM " + Const.users.TABLE_NAME_USERS
 				+ " WHERE " + Const.users.USERS_PHONENUMBER + " = '" + phone
 				+ "' AND " + Const.users.USERS_PASSWORD + " = '" + passWord
@@ -44,7 +42,6 @@ public class UserUtil {
 	}
 
 	public User loginWithNick(String nickName, String passWord) {
-		passWord = EncryUtil.getHash(passWord);
 		String sql = "SELECT * FROM " + Const.users.TABLE_NAME_USERS
 				+ " WHERE " + Const.users.USERS_NICKNAME + " = '" + nickName
 				+ "' AND " + Const.users.USERS_PASSWORD + " = '" + passWord
@@ -53,7 +50,6 @@ public class UserUtil {
 	}
 
 	public User loginWithId(int id, String passWord) {
-		passWord = EncryUtil.getHash(passWord);
 		String sql = "SELECT * FROM " + Const.users.TABLE_NAME_USERS
 				+ " WHERE " + Const.users.USERS_ID + " = " + id + " AND "
 				+ Const.users.USERS_PASSWORD + " = '" + passWord + "'";
@@ -63,6 +59,13 @@ public class UserUtil {
 	public User checkIdDupli(int id) {
 		String sql = "SELECT * FROM " + Const.users.TABLE_NAME_USERS
 				+ " WHERE " + Const.users.USERS_ID + " = " + id;
+		return getInfo(statement, sql);
+	}
+
+	public User checkPhoneDupli(String phone) {
+		String sql = "SELECT * FROM " + Const.users.TABLE_NAME_USERS
+				+ " WHERE " + Const.users.USERS_PHONENUMBER + " = '" + phone
+				+ "'";
 		return getInfo(statement, sql);
 	}
 

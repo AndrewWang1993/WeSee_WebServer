@@ -27,6 +27,11 @@ import com.peoce.wesee.constant.Const;
  */
 public class UpdateServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -43,6 +48,7 @@ public class UpdateServlet extends HttpServlet {
 			ServletFileUpload sfu = new ServletFileUpload(dfif);
 			sfu.setFileSizeMax(Const.avatar.MAX_AVATAR_SIZE);
 			try {
+				@SuppressWarnings("unchecked")
 				List<FileItem> fileList = sfu.parseRequest(req);
 				Iterator<FileItem> file_iterator = fileList.iterator();
 				while (file_iterator.hasNext()) {

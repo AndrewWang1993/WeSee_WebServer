@@ -20,6 +20,7 @@ public class Const {
 		public static int PHONENUMBER_MISSED_ERROT = 0x0009;
 		public static int UNKNOW_ERROR = 0x000A;
 		public static int TOKEN_ERROR = 0x000B;
+		public static int PHONENUMBER_EXIST_ERROT = 0x000C;		
 	}
 
 	public interface general {
@@ -28,7 +29,7 @@ public class Const {
 		public static final String SERVER_URL = "127.0.0.1";
 		public static final String SERVER_PORT = "3306";
 		public static final String DATABASE_USER = "root";
-		// public static final String DATABASE_PASSWORD = "linux43032";
+//		 public static final String DATABASE_PASSWORD = "linux43032";
 		public static final String DATABASE_PASSWORD = "123456";
 	}
 

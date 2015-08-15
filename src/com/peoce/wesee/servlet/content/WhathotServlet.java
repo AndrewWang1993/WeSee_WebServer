@@ -23,7 +23,7 @@ import com.peoce.wesee.utils.ContentUtil;
 public class WhathotServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private int ERROR_CODE = Const.error_code.SUCCESS;
+	private int error_code = Const.error_code.SUCCESS;
 	ArrayList<Pic> list_pic;
 
 	@Override
@@ -38,7 +38,7 @@ public class WhathotServlet extends HttpServlet {
 
 		resp.setContentType("text/html;charset=UTF-8");
 
-		ERROR_CODE = Const.error_code.SUCCESS;
+		error_code = Const.error_code.SUCCESS;
 		list_pic = new ArrayList<Pic>();
 
 		String start = req.getParameter(Const.page.PARA_START);
@@ -56,11 +56,11 @@ public class WhathotServlet extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (Const.error_code.SUCCESS == ERROR_CODE ) {
+		if (Const.error_code.SUCCESS == error_code ) {
 			String respJson = JSON.toJSONString(list_pic);
 			pw.write(respJson);
 		} else {
-			pw.write("{errorcode:" + ERROR_CODE + "}");
+			pw.write("{errorcode:" + error_code + "}");
 		}
 		pw.flush();
 		pw.close();

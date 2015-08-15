@@ -20,7 +20,7 @@ import com.peoce.wesee.utils.UserUtil;
 public class RegeditServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 0x0001L;
-	private int ERROR_CODE = Const.error_code.SUCCESS;
+	private int error_code = Const.error_code.SUCCESS;
 	private int id = 0;
 
 	@Override
@@ -34,7 +34,7 @@ public class RegeditServlet extends HttpServlet {
 			throws ServletException, IOException {
 		resp.setContentType("text/html;charset=UTF-8");
 
-		ERROR_CODE = Const.error_code.SUCCESS;
+		error_code = Const.error_code.SUCCESS;
 		id = 0;
 
 		String phoneNumber = null;
@@ -55,11 +55,21 @@ public class RegeditServlet extends HttpServlet {
 		 * check if phonenumber is existed
 		 */
 		if (phoneNumber == null) {
-			ERROR_CODE = Const.error_code.PHONENUMBER_MISSED_ERROT;
+			error_code = Const.error_code.PHONENUMBER_MISSED_ERROT;
 			System.out.println("missing phone number!!!");
-			write(ERROR_CODE, resp);
+			write(error_code, resp);
 			return;
 		}
+		/**
+		 * check if phone is duplicated
+		 */
+		if(UserUtil.getInstance().checkPhoneDupli(phoneNumber)!=null){
+			error_code=Const.error_code.PHONENUMBER_EXIST_ERROT;
+			System.out.println("this phonenumber already regedit!!!");
+			write(error_code, resp);
+			return;
+		}
+		
 		/**
 		 * if user don't set password so we generatived a random password based
 		 * by time
