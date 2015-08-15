@@ -2,11 +2,11 @@ package com.peoce.wesee.constant;
 
 public class Const {
 
-	public interface avatar{
-		public static String AVATAR_PATH="/home/avatar/";
-		public static long MAX_AVATAR_SIZE=3*1024*1024;
+	public interface avatar {
+		public static String AVATAR_PATH = "/home/avatar/";
+		public static long MAX_AVATAR_SIZE = 3 * 1024 * 1024;
 	}
-	
+
 	public interface error_code {
 		public static int SUCCESS = 0x0000;
 		public static int PARAM_MALE_FORMAT_ERROT = 0x0001;
@@ -28,7 +28,7 @@ public class Const {
 		public static final String SERVER_URL = "127.0.0.1";
 		public static final String SERVER_PORT = "3306";
 		public static final String DATABASE_USER = "root";
-//		public static final String DATABASE_PASSWORD = "linux43032";
+		// public static final String DATABASE_PASSWORD = "linux43032";
 		public static final String DATABASE_PASSWORD = "123456";
 	}
 
@@ -46,34 +46,47 @@ public class Const {
 		public static final String USERS_TOKEN = "Token";
 	}
 
-	public interface user_relation{
+	public interface user_pic {
+		public static final String TABLE_NAME_USER_PIC = "user_pic";
+		public static final String USER_PIC_ID = "id";
+		public static final String USER_PIC_DESC = "Descript";
+		public static final String USER_PIC_PHOTOID = "PhotoId";
+		public static final String USER_PIC_UPCOUNT = "UpCount";
+		public static final String USER_PIC_ISRETWITTER = "IsRetwitter";
+		public static final String USER_PIC_PUBLIISHTIME = "PublishTime";
+	}
+
+	public interface user_relation {
 		public static final String TABLE_NAME_USER_RELATION = "user_relation";
 		public static final String USER_RELATION_ID = "Id";
 		public static final String USER_RELATION_FRIENDID = "FriendId";
 		public static final String USER_RELATION_ISBLOCK = "IsBlock";
 		public static final String USER_RELATION_NOTVISIBLE = "NotVisible";
 	}
-	
-	
-	public interface pic{
+
+	public interface pic {
 		public static final String TABLE_NAME_PIC = "pic";
 		public static final String PIC_PHOTOID = "PhotoId";
+		public static final String PIC_PHOTODESC = "Descript";
 		public static final String PIC_PHOTOURL = "PhotoUrl";
 		public static final String PIC_UPCOUNT = "UpCount";
 		public static final String PIC_CREATEBY = "CreateBy";
 		public static final String PIC_CREATETIME = "PicCreateTime";
 		public static final String PIC_TAG = "Tag";
+	}
+
+	public interface page {
 		public static final String PARA_START = "start";
 		public static final String PARA_OFF = "off";
-		
+
 	}
-	
+
 	public interface sqlresponse {
 		public static final int SQL_OK = 0x1000;
 		public static final int SQL_FAIL = 0x1001;
 	}
-	
-	public interface token{
+
+	public interface token {
 		public static final String key = "Fx!O8f%q1%Jg";
 	}
 }

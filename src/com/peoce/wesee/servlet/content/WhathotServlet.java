@@ -41,8 +41,8 @@ public class WhathotServlet extends HttpServlet {
 		ERROR_CODE = Const.error_code.SUCCESS;
 		list_pic = new ArrayList<Pic>();
 
-		String start = req.getParameter(Const.pic.PARA_START);
-		String off = req.getParameter(Const.pic.PARA_OFF);
+		String start = req.getParameter(Const.page.PARA_START);
+		String off = req.getParameter(Const.page.PARA_OFF);
 		if (start == null || off == null) {
 			list_pic = ContentUtil.getInstance().getWhatHot();
 		} else {

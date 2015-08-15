@@ -39,6 +39,12 @@
 		<servlet-name>MyFriendListServlet</servlet-name>
 		<servlet-class>com.peoce.wesee.servlet.circle.MyFriendListServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<description>My Friend share</description>
+		<display-name>Get My Friend share</display-name>
+		<servlet-name>MyFriendsShareServlet</servlet-name>
+		<servlet-class>com.peoce.wesee.servlet.circle.MyFriendsShareServlet</servlet-class>
+	</servlet>
 
 
 	<servlet-mapping>
@@ -61,6 +67,9 @@
 		<servlet-name>MyFriendListServlet</servlet-name>
 		<url-pattern>/myfriendlist</url-pattern>
 	</servlet-mapping>
-
+	<servlet-mapping>
+		<servlet-name>MyFriendsShareServlet</servlet-name>
+		<url-pattern>/myfriendshare</url-pattern>
+	</servlet-mapping>
 
 </web-app>

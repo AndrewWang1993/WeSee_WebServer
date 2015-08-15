@@ -3,63 +3,89 @@ package com.peoce.wesee.model;
 public class Pic {
 	String photoId;
 	String photoUrl;
+	String descript;
 	int upCount;
 	int createBy;
 	String picCreateTime;
 	String tag;
+	String nickName;
 	
-	public Pic(String photoId, String photoUrl, int upCount, int createBy,
-			String picCreateTime, String tag) {
-		super();
-		this.photoId = photoId;
-		this.photoUrl = photoUrl;
-		this.upCount = upCount;
-		this.createBy = createBy;
-		this.picCreateTime = picCreateTime;
-		this.tag = tag;
+	public Pic(){
 	}
+
 	public String getPhotoId() {
 		return photoId;
 	}
+
 	public void setPhotoId(String photoId) {
 		this.photoId = photoId;
 	}
+
 	public String getPhotoUrl() {
 		return photoUrl;
 	}
+
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
 	}
+
+	public String getDescript() {
+		return descript;
+	}
+
+	public void setDescript(String descript) {
+		this.descript = descript;
+	}
+
 	public int getUpCount() {
 		return upCount;
 	}
+
 	public void setUpCount(int upCount) {
 		this.upCount = upCount;
 	}
+
 	public int getCreateBy() {
 		return createBy;
 	}
+
 	public void setCreateBy(int createBy) {
 		this.createBy = createBy;
 	}
+
 	public String getPicCreateTime() {
 		return picCreateTime;
 	}
+
 	public void setPicCreateTime(String picCreateTime) {
 		this.picCreateTime = picCreateTime;
 	}
+
 	public String getTag() {
 		return tag;
 	}
+
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
-	
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + createBy;
+		result = prime * result
+				+ ((descript == null) ? 0 : descript.hashCode());
+		result = prime * result
+				+ ((nickName == null) ? 0 : nickName.hashCode());
 		result = prime * result + ((photoId == null) ? 0 : photoId.hashCode());
 		result = prime * result
 				+ ((photoUrl == null) ? 0 : photoUrl.hashCode());
@@ -69,6 +95,7 @@ public class Pic {
 		result = prime * result + upCount;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -79,6 +106,16 @@ public class Pic {
 			return false;
 		Pic other = (Pic) obj;
 		if (createBy != other.createBy)
+			return false;
+		if (descript == null) {
+			if (other.descript != null)
+				return false;
+		} else if (!descript.equals(other.descript))
+			return false;
+		if (nickName == null) {
+			if (other.nickName != null)
+				return false;
+		} else if (!nickName.equals(other.nickName))
 			return false;
 		if (photoId == null) {
 			if (other.photoId != null)
@@ -104,12 +141,26 @@ public class Pic {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "Pic [photoId=" + photoId + ", photoUrl=" + photoUrl
-				+ ", upCount=" + upCount + ", createBy=" + createBy
-				+ ", picCreateTime=" + picCreateTime + ", tag=" + tag + "]";
+				+ ", descript=" + descript + ", upCount=" + upCount
+				+ ", createBy=" + createBy + ", picCreateTime=" + picCreateTime
+				+ ", tag=" + tag + ", nickName=" + nickName + "]";
 	}
-	
-	
+
+	public Pic(String photoId, String photoUrl, String descript, int upCount,
+			int createBy, String picCreateTime, String tag, String nickName) {
+		super();
+		this.photoId = photoId;
+		this.photoUrl = photoUrl;
+		this.descript = descript;
+		this.upCount = upCount;
+		this.createBy = createBy;
+		this.picCreateTime = picCreateTime;
+		this.tag = tag;
+		this.nickName = nickName;
+	}
+
 }

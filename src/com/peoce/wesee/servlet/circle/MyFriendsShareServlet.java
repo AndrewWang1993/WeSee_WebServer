@@ -2,20 +2,24 @@ package com.peoce.wesee.servlet.circle;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSON;
 import com.peoce.wesee.constant.Const;
+import com.peoce.wesee.model.Pic;
 import com.peoce.wesee.utils.CircleUtil;
-import com.peoce.wesee.utils.CommonUtil;
-import com.peoce.wesee.utils.JsonUtil;
 import com.peoce.wesee.utils.TokenUtil;
 
-public class MyFriendListServlet extends HttpServlet {
-	private static final long serialVersionUID = 0x2000L;
+public class MyFriendsShareServlet extends HttpServlet {
+	private static final long serialVersionUID = 0x2001L;
 	private int error_code = Const.error_code.SUCCESS;
-	int[] friendList = null;
+	List<Pic> pic_list;
 	String token;
 
 	@Override
@@ -41,7 +45,14 @@ public class MyFriendListServlet extends HttpServlet {
 				System.out.println("token error");
 				error_code = Const.error_code.TOKEN_ERROR;
 			} else {
-				friendList = CircleUtil.GetInstance().getFriendList(id);
+				String start = req.getParameter(Const.page.PARA_START);
+				String off = req.getParameter(Const.page.PARA_OFF);
+				pic_list = new ArrayList<Pic>();
+				if (start == null || off == null) {
+					pic_list = CircleUtil.GetInstance().getFridenShare(id);
+				} else {
+					// TODO page limit is umimplement
+				}
 			}
 		}
 		write(error_code, resp);
@@ -54,10 +65,8 @@ public class MyFriendListServlet extends HttpServlet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (Const.error_code.SUCCESS == error_code && null != friendList) {
-
-			String respJson = JsonUtil.generaJsonArray(CommonUtil
-					.int2Integer(friendList));
+		if (Const.error_code.SUCCESS == error_code && 0 != pic_list.size()) {
+			String respJson = JSON.toJSONString(pic_list);
 			pw.write(respJson);
 		} else {
 			pw.write("{errorcode:" + error_code + "}");

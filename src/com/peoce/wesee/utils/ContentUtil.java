@@ -32,28 +32,40 @@ public class ContentUtil {
 	}
 
 	public ArrayList<Pic> getWhatNew(int limitStart, int limitOff) {
-		String sql = "SELECT * FROM " + Const.pic.TABLE_NAME_PIC + " ORDER BY "
-				+ Const.pic.PIC_CREATETIME + " DESC LIMIT " + limitStart
-				+ " , " + (limitOff - limitStart);
+		String sql = "SELECT p.*,u." + Const.users.USERS_NICKNAME + " FROM "
+				+ Const.pic.TABLE_NAME_PIC + " AS p LEFT JOIN "
+				+ Const.users.TABLE_NAME_USERS + " AS u ON p."
+				+ Const.pic.PIC_CREATEBY + " = u." + Const.users.USERS_ID
+				+ " ORDER BY p." + Const.pic.PIC_CREATETIME + " DESC LIMIT "
+				+ limitStart + " , " + (limitOff - limitStart);
 		return getInfo(statement, sql);
 	}
 
 	public ArrayList<Pic> getWhatNew() {
-		String sql = "SELECT * FROM " + Const.pic.TABLE_NAME_PIC + " ORDER BY "
-				+ Const.pic.PIC_CREATETIME + " DESC";
+		String sql = "SELECT p.*,u." + Const.users.USERS_NICKNAME + " FROM "
+				+ Const.pic.TABLE_NAME_PIC + " AS p LEFT JOIN "
+				+ Const.users.TABLE_NAME_USERS + " AS u ON p."
+				+ Const.pic.PIC_CREATEBY + " = u." + Const.users.USERS_ID
+				+ " ORDER BY p." + Const.pic.PIC_CREATETIME + " DESC ";
 		return getInfo(statement, sql);
 	}
 
 	public ArrayList<Pic> getWhatHot(int limitStart, int limitOff) {
-		String sql = "SELECT * FROM " + Const.pic.TABLE_NAME_PIC + " ORDER BY "
-				+ Const.pic.PIC_UPCOUNT + " DESC LIMIT " + limitStart + " , "
-				+ (limitOff - limitStart);
+		String sql = "SELECT p.*,u." + Const.users.USERS_NICKNAME + " FROM "
+				+ Const.pic.TABLE_NAME_PIC + " AS p LEFT JOIN "
+				+ Const.users.TABLE_NAME_USERS + " AS u ON p."
+				+ Const.pic.PIC_CREATEBY + " = u." + Const.users.USERS_ID
+				+ " ORDER BY p." + Const.pic.PIC_UPCOUNT + " DESC LIMIT "
+				+ limitStart + " , " + (limitOff - limitStart);
 		return getInfo(statement, sql);
 	}
 
 	public ArrayList<Pic> getWhatHot() {
-		String sql = "SELECT * FROM " + Const.pic.TABLE_NAME_PIC + " ORDER BY "
-				+ Const.pic.PIC_UPCOUNT + " DESC";
+		String sql = "SELECT p.*,u." + Const.users.USERS_NICKNAME + " FROM "
+				+ Const.pic.TABLE_NAME_PIC + " AS p LEFT JOIN "
+				+ Const.users.TABLE_NAME_USERS + " AS u ON p."
+				+ Const.pic.PIC_CREATEBY + " = u." + Const.users.USERS_ID
+				+ " ORDER BY p." + Const.pic.PIC_UPCOUNT + " DESC";
 		return getInfo(statement, sql);
 	}
 
@@ -62,13 +74,15 @@ public class ContentUtil {
 			ResultSet rs = state.executeQuery(sql);
 			while (rs.next()) {
 				String photoid = rs.getString(Const.pic.PIC_PHOTOID);
+				String descript=rs.getString(Const.pic.PIC_PHOTODESC);
 				String photourl = rs.getString(Const.pic.PIC_PHOTOURL);
 				int upcount = rs.getInt(Const.pic.PIC_UPCOUNT);
 				int createby = rs.getInt(Const.pic.PIC_CREATEBY);
 				String createtime = rs.getString(Const.pic.PIC_CREATETIME);
 				String tag = rs.getString(Const.pic.PIC_TAG);
-				list_pic.add(new Pic(photoid, photourl, upcount, createby,
-						createtime, tag));
+				String nickname=rs.getString(Const.users.USERS_NICKNAME);
+				list_pic.add(new Pic(photoid, photourl,descript, upcount, createby,
+						createtime, tag,nickname));
 			}
 			rs.close();
 			return list_pic;
